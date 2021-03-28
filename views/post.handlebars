@@ -1,0 +1,90 @@
+<div class="post-card">
+  <div class="post-card-header">
+    {{title}}
+  </div>
+  <div class="card-body">
+    <p>
+      {{body}}
+    </p>
+    <p>
+      Posted by: {{user}}  <!-- add date -->
+    </p>
+  </div>
+</div>
+
+
+<!-- add an add comment button to toggle show/hide the form below-->
+<div class="add-comment-container">
+  <h2>
+    Add a Comment
+  </h2>
+  <form class="add-comment-form">
+    <label for="body">
+      Comment:
+    </label>
+    <br />
+    <textarea id="body" name="body" rows="6" cols="30">
+
+    </textarea>
+    <br />
+    <button type="submit" value="Submit">
+      Submit
+    </button>
+  </form>
+</div>
+
+
+
+
+<!-- add an edit button to toggle show/hide the form below-->
+<div class="edit-post-container">
+  <h2>
+    Update Post
+  </h2>
+  <form class="edit-post-form">
+    <label for="title">
+      Post Title:
+    </label>
+    <br />
+    <textarea id="title" name="title" rows="2" cols="30">
+      {{title}}
+    </textarea>
+    <br />
+    <label for="body">
+      Body:
+    </label>
+    <br />
+    <textarea id="body" name="body" rows="6" cols="30">
+      {{body}}
+    </textarea>
+    <br />
+    <button type="submit" value="Submit">
+      Submit
+    </button>
+  </form>
+</div>
+
+<!-- add an delete button to toggle show/hide the form below-->
+<div class="delete-post-container">
+  <h2>
+    Delete Post
+  </h2>
+  <form class="delete-post-form">
+    <input type="checkbox" id="delete" name="delete" value="false" />
+    <label for="delete">
+      Check box if you want to delete this post.
+    </label>
+    <br />
+    <button type="submit" value="Submit">
+      Submit
+    </button>
+  </form>
+</div>
+
+
+
+<script src="/js/edit-post.js"></script>
+<script src="/js/add-comment.js"></script>
+<script src="/js/edit-comment.js"></script>
+<script src="/js/delete-post.js"></script>
+<script src="/js/delete-comment.js"></script>
