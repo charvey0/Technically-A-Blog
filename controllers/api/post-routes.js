@@ -17,12 +17,6 @@ router.get('/:id', async (req, res) => {
     };     
 });
 
-
-
-
-
-
-
 // route to create/add a post
 router.post('/', async (req, res) => {
   try { 
@@ -50,8 +44,7 @@ router.put('/:id', async (req, res) => {
     {
         title: req.body.title,
         body: req.body.body,
-        user: req.body.user,
-        date: req.body.date,
+        user_id: req.body.user_id,
     },
     {
       where: {
