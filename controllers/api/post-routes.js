@@ -1,8 +1,30 @@
 const router = require('express').Router();
 const Post = require('../../models/Post');
 
+
+
+router.get('/:id', async (req, res) => {
+  try{ 
+      const postData = await Post.findByPk(req.params.id);
+      if(!postData) {
+          res.status(404).json({message: 'No post with this id!'});
+          return;
+      }
+      const post = postData.get({ plain: true });
+      res.render('post', post);
+    } catch (err) {
+        res.status(500).json(err);
+    };     
+});
+
+
+
+
+
+
+
 // route to create/add a post
-router.post('/post/', async (req, res) => {
+router.post('/', async (req, res) => {
   try { 
     const postData = await Post.create({
     title: req.body.title,
@@ -17,7 +39,13 @@ router.post('/post/', async (req, res) => {
 });
 
 // route to edit a post
-router.put('/post/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
+//   {
+//     "title": "Post Number 1",
+//     "body": "Lorem ipsum dolor sit amet, consectetur.",
+//     "user_id": "1"
+// }
+
   try {
     const post = await Post.update(
     {
@@ -38,7 +66,7 @@ router.put('/post/:id', async (req, res) => {
 });
 
 // Delete route for a post
-router.delete('/post/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     Post.destroy({
       where: {
         id: req.params.id,

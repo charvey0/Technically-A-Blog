@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Comment = require('../../models/Comment');
 
 // route to create/add a comment
-router.post('/comment/', async (req, res) => {
+router.post('/', async (req, res) => {
   try { 
     const commentData = await Comment.create({
     post: req.body.post,
@@ -17,7 +17,7 @@ router.post('/comment/', async (req, res) => {
 });
 
 // route to edit a comment
-router.put('/comment/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const comment = await Comment.update(
     {
@@ -37,7 +37,7 @@ router.put('/comment/:id', async (req, res) => {
 });
 
 // Delete route for a comment
-router.delete('/comment/:id', (req, res) => {
+router.delete(':id', (req, res) => {
     Comment.destroy({
       where: {
         id: req.params.id,
