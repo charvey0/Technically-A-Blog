@@ -1,21 +1,22 @@
 <div class="post-container">
-  <div class="card-header col-md-10">
-    <h2>
-      All posts
-    </h2>
-  </div>
   {{#each posts as |post|}}
-    <div class="post col-md-5">
-      <p>
-        {{post.id}}.
-        {{post.title}}
-      </p>
+  <a href="/api/post/{{post.id}}" style=text-decoration:none;>
+    <div class="w3-card w3-hover-shadow" style="margin: 20px 0px 20px 10px;">
+
+    <header class="w3-container w3-green">
+      <h5>{{post.title}}</h5>
+    </header>
+
+    <div class="w3-container">
+      <p>{{post.body}}</p>
     </div>
-    <div class="col-md-7">
-      <p>
-        {{post.body}}
-      </p>
-    </div>
+
+    <footer class="w3-white" style="padding-left: 10px;">
+      <p>Posted by {{post.user_id}} on {{post.date}}</p>
+    </footer>
+
+  </div>
+  </a>
   {{/each}}
 </div>
 
