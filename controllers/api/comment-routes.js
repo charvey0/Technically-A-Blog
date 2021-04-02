@@ -22,11 +22,11 @@ router.get('/:id', async (req, res) => {
 router.post('/:id', async (req, res) => {
   try { 
     const commentData = await Comment.create({
-    post_id: req.body.req.params.id,
-    body: req.params.body,
-    user_id: "2",
+    post_id: req.params.id,
+    body: req.body.body,
+    user_id: req.user.dataValues.id,
   });
-  res.status(200).json(commentData);
+  res.status(200).redirect('/dashboard');
 } catch (err) {
   res.status(400).json({ message: 'not created' });
 }
@@ -41,7 +41,7 @@ router.post('/edit/:id', async (req, res) => {
     },
     {
       where: {
-        post: req.params.id,
+        id: req.params.id,
       },
     });
     res.status(200).json(comment);

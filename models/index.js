@@ -3,8 +3,8 @@ const Post = require('./Post');
 const Comment = require('./Comment');
 const { post } = require('../controllers');
 
-User.hasMany(Post);
-Post.hasOne(User);  
+User.belongsToMany(Post);
+Post.belongsTo(User);  
 Post.hasMany(Comment);
 Comment.hasOne(Post);
 

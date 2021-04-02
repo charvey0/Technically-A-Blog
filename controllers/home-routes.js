@@ -31,11 +31,18 @@ router.get('/register', async (req, res) => {
 
 router.get('/dashboard', checkAuthenticated, async (req, res) => {
   const postData = await Post.findAll(
-//          { include: Comment }
+//    [{ include: Comment }]
        ).catch((err) => { 
           res.json(err);
         });
         const posts = postData.map((post) => post.get({ plain: true }));
+        posts.forEach( (post) => {
+          let owner = false;
+          if (req.user.dataValues.id == post.user_id) {
+            owner = true;
+          }
+          post.owner = owner;  
+         }); 
           res.render('dashboard', { posts: posts, layout: 'user'  });
 });
 
@@ -44,6 +51,12 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/login',
   failureFlash: true
 }));
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 
 // route to create/add a post
 router.post('/register', async (req, res) => {

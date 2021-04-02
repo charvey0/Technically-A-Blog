@@ -1,5 +1,7 @@
-<div class="post-container">
+<div class="post-container" style="padding: 10px;">
   <h1>Welcome to your Dashboard</h1>
+  <a href="api/post/create" class="w3-button w3-purple">Create Post</a>
+
   {{#each posts as |post|}}
   <a href="/api/post/{{post.id}}" style=text-decoration:none;>
     <div class="w3-card w3-hover-shadow" style="margin: 20px 0px 20px 10px;">
@@ -14,6 +16,14 @@
 
     <footer class="w3-white" style="padding-left: 10px;">
       <p>Posted by {{post.user_id}} on {{post.createdAt}}</p>
+
+      <div class="w3-bar">
+        <a href="api/comment/{{post.id}}" class="w3-button w3-black">Comment</a>
+        {{#if post.owner }}
+        <a href="api/post/edit/{{post.id}}" class="w3-button w3-black">Edit</a>
+        <a href="api/post/delete/{{post.id}}" class="w3-button w3-black">Delete</a>
+        {{/if}}
+      </div>
     </footer>
 
   </div>
