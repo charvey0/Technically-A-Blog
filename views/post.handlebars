@@ -1,43 +1,31 @@
-<div class="post-card">
-  <div class="post-card-header">
-    {{title}}
+<div class="post-container">
+  <a href="/api/post/{{id}}" style=text-decoration:none;>
+    <div class="w3-card w3-hover-shadow" style="margin: 20px 0px 20px 10px;">
+
+    <header class="w3-container w3-green">
+      <h5>{{title}}</h5>
+    </header>
+
+    <div class="w3-container">
+      <p>{{body}}</p>
+    </div>
+
+    <footer class="w3-white" style="padding-left: 10px;">
+      <p>Posted by {{user_id}} on {{createdAt}}</p>
+    </footer>
+
   </div>
-  <div class="card-body">
-    <p>
-      {{body}}
-    </p>
-    <p>
-      Posted by: {{user}}  {{created_at}}
-    </p>
-  </div>
+  </a>
 </div>
 
 
-<!-- add an add comment button to toggle show/hide the form below-->
-<div class="add-comment-container">
-  <h2>
-    Add a Comment
-  </h2>
-  <form class="add-comment-form">
-    <label for="body">
-      Comment:
-    </label>
-    <br />
-    <textarea id="body" name="body" rows="6" cols="30">
-
-    </textarea>
-    <br />
-    <button type="submit" value="Submit_comment">
-      Submit
-    </button>
-  </form>
-</div>
-
-
+<a class="w3-button w3-medium" href="/api/comment/{{id}}">Comment</a>
+<a class="w3-button w3-medium" href="/api/post/edit/{{id}}">Edit</a>
+<a class="w3-button w3-medium" href="/api/post/delete/{{id}}">Delete</a>
 
 
 <!-- add an edit button to toggle show/hide the form below-->
-<div class="edit-post-container">
+<div class="edit-post-container" style="margin: 20px 0px 20px 10px; display:none;">
   <h2>
     Update Post
   </h2>
@@ -65,7 +53,7 @@
 </div>
 
 <!-- add an delete button to toggle show/hide the form below-->
-<div class="delete-post-container">
+<div class="delete-post-container" style="margin: 20px 0px 20px 10px; display:none;">
   <h2>
     Delete Post
   </h2>
@@ -82,8 +70,7 @@
 </div>
 
 
-
-<script src="/js/edit-post.js"></script>
+<script src="/public/js/edit-post.js"></script>
 <script src="/js/add-comment.js"></script>
 <script src="/js/delete-post.js"></script> 
 {{!-- <script src="/js/add-post.js"></script>

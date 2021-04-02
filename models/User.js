@@ -11,11 +11,11 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    pass: {
+    hash: {
       type: DataTypes.STRING,
       allowNull: false,
     },

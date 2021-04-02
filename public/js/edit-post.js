@@ -24,5 +24,6 @@ async function editPostFormHandler(event) {
       alert('Failed to edit post');
     }
   };
-  
-  document.querySelector('.edit-post-form').addEventListener('submit', editPostFormHandler);
+
+   
+  document.querySelector('#edit-post-form').addEventListener('submit', editPostFormHandler);

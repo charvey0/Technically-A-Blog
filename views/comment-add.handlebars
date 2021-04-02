@@ -1,0 +1,19 @@
+<!-- add an add comment button to toggle show/hide the form below-->
+<div id="add-comment-container" style="margin: 20px 0px 20px 10px;">
+  <h2>
+    Add a Comment
+  </h2>
+  <form class="add-comment-form" method="POST" action="./{{id}}">
+    <label for="body">
+      Comment:
+    </label>
+    <br />
+    <textarea id="body" name="body" rows="6" cols="30">
+
+    </textarea>
+    <br />
+    <button type="submit" value="Submit_comment">
+      Submit
+    </button>
+  </form>
+</div>
