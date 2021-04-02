@@ -7,13 +7,7 @@ const User = require('../../models/User');
 // route to get post by id
 router.get('/:id', async (req, res) => {
   try{ 
-       const postData = await Post.findByPk(req.params.id, 
-      //   {
-      //    include: [{
-      //      model: Comment
-      //    }]
-      //  }
-       );
+       const postData = await Post.findAll({ include: Comment} );
       if(!postData) {
           res.status(404).json({message: 'No post with this id!'});
           return;
