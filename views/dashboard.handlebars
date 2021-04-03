@@ -1,6 +1,6 @@
-<div class="post-container" style="padding: 10px;">
+<div class="w3-container" style="padding: 10px;">
   <h1>Welcome to your Dashboard</h1>
-  <a href="api/post/create" class="w3-button w3-purple">Create Post</a>
+  <a href="/create" class="w3-button w3-purple">Create Post</a>
 
   {{#each posts as |post|}}
   <a href="/api/post/{{post.id}}" style=text-decoration:none;>

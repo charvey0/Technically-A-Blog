@@ -1,40 +1,60 @@
 const router = require('express').Router();
-const Post = require('../../models/Post');
-const Comment = require('../../models/Comment');
-const User = require('../../models/User');
+const { Post, Comment } = require('../../models');
+
 
 
 // route to get post by id
-router.get('/:id', async (req, res) => {
+router.get('/:id', checkAuthenticated, async (req, res) => {
   try{ 
-       const postData = await Post.findAll({ include: Comment} );
+      const postData = await Post.findByPk(req.params.id);
       if(!postData) {
           res.status(404).json({message: 'No post with this id!'});
           return;
       }
       const post = postData.get({ plain: true });
-      res.render('post', post);
+
+      const commentData = await Comment.findAll(
+        {
+          where: {
+            post_id: req.params.id,
+          },
+        }        
+      );
+
+      const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+      res.render('post', { post: post, comments: comments, layout: 'user' });
     } catch (err) {
         res.status(500).json(err);
     };     
 });
 
-// route to create/add a post
-router.post('/', async (req, res) => {
-  try { 
-    const postData = await Post.create({
-    title: req.body.title,
-    body: req.body.body,
-    user_id: 2,
-  });
-  res.status(200).json(postData)
-} catch (err) {
-  res.status(400).json(err);
-}
-});
 
 // route to edit a post
-router.put('/:id', async (req, res) => {
+router.get('/edit/:id', checkAuthenticated, async (req, res) => {
+  //   {
+  //     "title": "Post Number 1",
+  //     "body": "Lorem ipsum dolor sit amet, consectetur.",
+  //     "user_id": "1"
+  // }
+  
+    try {
+      const postData = await Post.findByPk(req.params.id);
+      if(!postData) {
+          res.status(404).json({message: 'No post with this id!'});
+          return;
+      }
+      const post = postData.get({ plain: true });
+      res.render('post-edit', { post: post, layout: 'user'  } );
+    } catch (err) {
+        res.status(500).json(err);
+    };   
+
+});
+
+
+// route to edit a post
+router.post('/edit/:id', checkAuthenticated, async (req, res) => {
 //   {
 //     "title": "Post Number 1",
 //     "body": "Lorem ipsum dolor sit amet, consectetur.",
@@ -53,24 +73,57 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       },
     });
-    res.status(200).json(post);
+    res.status(200).redirect('/dashboard');
   } catch (err) {
       res.status(500).json(err);
-    };
+  }
 });
 
-// Delete route for a post
-router.delete('/:id', (req, res) => {
-    Post.destroy({
-      where: {
-        id: req.params.id,
-      },
-    })
-      .then((deletedPost) => {
-        res.json(deletedPost);
-      })
-      .catch((err) => res.json(err));
-  });
+router.get('/delete/:id', checkAuthenticated, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id);
+    if(!postData) {
+        res.status(404).json({message: 'No post with this id!'});
+        return;
+    }
+    const post = postData.get({ plain: true });
+    res.render('post-delete', { post: post, layout: 'user' } );
+  } catch (err) {
+      res.status(500).json(err);
+  }   
+});
 
+router.post('/delete/:id', checkAuthenticated, async (req, res) => {
+  try {
+     const comments = await Comment.findAll({
+       where: {
+         post_id: req.params.id,
+       },
+     });
+     console.log(comments);
+     comments.forEach( async (comment) => {
+         await Comment.destroy({
+           where: {
+             id: comment.id,
+           },
+         });      
+     });
+     const deletedPost = await Post.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.status(200).redirect('/dashboard');
+  } catch (error) {
+    res.status(500).json(error);  
+  }
+});
 
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+  
 module.exports = router;

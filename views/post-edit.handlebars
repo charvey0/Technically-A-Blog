@@ -1,0 +1,21 @@
+<div id="w3-container" style="margin: 20px 0px 20px 10px;">
+  <h2>
+    Edit Post #{{post.id}}
+  </h2>
+  <form class="form" method="POST" action="/api/post/edit/{{post.id}}">
+    <label for="title">
+      Title:
+    </label>
+    <br />
+    <textarea id="title" name="title" rows="6" cols="100">{{post.title}}</textarea>    
+    <label for="body">
+      Body:
+    </label>
+    <br />
+    <textarea id="body" name="body" rows="10" cols="100">{{post.body}}</textarea>
+    <br />
+    <button type="submit" value="Submit">
+      Submit
+    </button>
+  </form>
+</div>

@@ -46,6 +46,50 @@ router.get('/dashboard', checkAuthenticated, async (req, res) => {
           res.render('dashboard', { posts: posts, layout: 'user'  });
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// route to create/add a post
+router.post('/create', checkAuthenticated, async (req, res) => {
+  try { 
+    const postData = await Post.create({
+      title: req.body.title,
+      body: req.body.body,
+      user_id: req.user.dataValues.id
+    });
+    res.status(200).redirect('/dashboard');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/create', checkAuthenticated, async (req, res) => {
+  res.render('post-add', { layout: 'user' } );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/dashboard',
   failureRedirect: '/login',
@@ -58,7 +102,7 @@ router.get('/logout', (req, res) => {
 });
 
 
-// route to create/add a post
+// route to create/add a user
 router.post('/register', async (req, res) => {
     try {
          const hash = await bcrypt.hash(req.body.password, 10);

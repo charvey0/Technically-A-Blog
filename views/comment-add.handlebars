@@ -1,9 +1,8 @@
-<!-- add an add comment button to toggle show/hide the form below-->
 <div id="add-comment-container" style="margin: 20px 0px 20px 10px;">
   <h2>
     Add a Comment
   </h2>
-  <form class="add-comment-form" method="POST" action="/api/comment/{{id}}">
+  <form class="add-comment-form" method="POST" action="/api/comment/{{post.id}}">
     <label for="body">
       Comment:
     </label>

@@ -12,13 +12,13 @@ router.get('/:id', async (req, res) => {
           return;
       }
       const post = postData.get({ plain: true });
-      res.render('comment-add', post);
+      res.render('comment-add', { post: post, layout: 'user' });
     } catch (err) {
         res.status(500).json(err);
     };     
 });
 
-// route to create/add a comment
+// route to create/add a comment by post id
 router.post('/:id', async (req, res) => {
   try { 
     const commentData = await Comment.create({
@@ -32,36 +32,37 @@ router.post('/:id', async (req, res) => {
 }
 });
 
-// route to edit a comment
-router.post('/edit/:id', async (req, res) => {
-  try {
-    const comment = await Comment.update(
-    {
-        body: req.body.body
-    },
-    {
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).json(comment);
-  } catch (err) {
-      res.status(500).json(err);
-    };
-});
 
-// Delete route for a comment
-router.delete('/:id', (req, res) => {
-    Comment.destroy({
-      where: {
-        id: req.params.id,
-      },
-    })
-      .then((deletedComment) => {
-        res.json(deletedComment);
-      })
-      .catch((err) => res.json(err));
-  });
+// // route to edit a comment
+// router.post('/edit/:id', async (req, res) => {
+//   try {
+//     const comment = await Comment.update(
+//     {
+//         body: req.body.body
+//     },
+//     {
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     res.status(200).json(comment);
+//   } catch (err) {
+//       res.status(500).json(err);
+//     };
+// });
+
+// // Delete route for a comment
+// router.delete('/:id', (req, res) => {
+//     Comment.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     })
+//       .then((deletedComment) => {
+//         res.json(deletedComment);
+//       })
+//       .catch((err) => res.json(err));
+//   });
 
 
 module.exports = router;
