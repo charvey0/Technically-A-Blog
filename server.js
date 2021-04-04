@@ -1,14 +1,18 @@
 const path = require('path');
 
-// handlebars
-const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
 
 // express
 const express = require('express');
 const session = require('express-session');
 const flash = require('express-flash');
 const app = express();
+
+// handlebars
+const helpers = require('./utils/helpers');
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create({ helpers});
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // other
 const bcrypt = require('bcrypt');
@@ -43,8 +47,6 @@ initializePassport(
   id => { return User.findOne({ where: { id: id } })}, 
   );
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

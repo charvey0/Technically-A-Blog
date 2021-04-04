@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
     //   required: true
     // }
   ).catch((err) => { 
-//    console.log(postData);
       res.json(err);
     });
     const posts = postData.map((post) => post.get({ plain: true }));
@@ -117,7 +116,6 @@ router.post('/register', async (req, res) => {
          res.status(200).redirect("/login");
          // go to the home page
     } catch (err) {
-        console.log(err);
         res.status(500).send("Something went wrong!");
     }
 });

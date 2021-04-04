@@ -11,8 +11,12 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    body: {
+    username: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    body: {
+      type: DataTypes.STRING(1500),
       allowNull: false,
     },
     post_id: {

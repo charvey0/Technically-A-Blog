@@ -2,21 +2,25 @@
     {
         "body": "Comment 1 to Post Number 1",
         "post_id": "1",
-        "user_id": "2"
+        "user_id": "2",
+        "username": "Francine"
     },
     {
         "body": "Comment 1 to Post Number 2",
         "post_id": "2",
-        "user_id": "1"
+        "user_id": "1",
+        "username": "Bob"
     },
     {
         "body": "Comment 2 to Post Number 1",
         "post_id": "1",
-        "user_id": "1"
+        "user_id": "1",
+        "username": "Bob"
     },
     {
         "body": "Comment 2 to Post Number 2",
         "post_id": "2",
-        "user_id": "2"
+        "user_id": "2",
+        "username": "Francine"
     }
 ]

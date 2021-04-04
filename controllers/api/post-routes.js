@@ -115,7 +115,6 @@ router.post('/delete/:id', checkAuthenticated, async (req, res) => {
          post_id: req.params.id,
        },
      });
-     console.log(comments);
      comments.forEach( async (comment) => {
          await Comment.destroy({
            where: {

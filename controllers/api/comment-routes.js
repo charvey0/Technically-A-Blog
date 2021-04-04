@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Comment = require('../../models/Comment');
 const Post = require('../../models/Post');
+const User = require('../../models/User');
 
 
 // routes to get comments by post_id
@@ -20,10 +21,16 @@ router.get('/:id', checkAuthenticated, async (req, res) => {
 
 router.post('/:id', checkAuthenticated, async (req, res) => {
   try { 
+    const id = req.user.dataValues.id;
+    const userData = await User.findByPk(id);
+    const user = userData.get({ plain: true });
+    const username = user.username;
+
     const commentData = await Comment.create({
     post_id: req.params.id,
     body: req.body.body,
     user_id: req.user.dataValues.id,
+    username: username,
   });
   const comment = commentData.get({ plain: true });
   const redir = '/api/post/' + comment.post_id;
