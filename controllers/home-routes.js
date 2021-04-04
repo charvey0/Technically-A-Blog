@@ -6,20 +6,24 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 
-//const Post = require('./models/Post');
 // route to get all posts
 router.get('/', async (req, res) => {
-  const postData = await Post.findAll(
-    // { include: Comment,
-    //   required: true
-    // }
-  ).catch((err) => { 
+  const postData = await Post.findAll()
+  .catch((err) => { 
       res.json(err);
     });
     const posts = postData.map((post) => post.get({ plain: true }));
       res.render('all', { posts });
 });
 
+router.get('/home', async (req, res) => {
+  const postData = await Post.findAll()
+  .catch((err) => { 
+      res.json(err);
+    });
+    const posts = postData.map((post) => post.get({ plain: true }));
+      res.render('all', { posts: posts, layout: 'user' });
+});
 
 router.get('/login', async (req, res) => {
   res.render('login');
@@ -31,7 +35,9 @@ router.get('/register', async (req, res) => {
 
 router.get('/dashboard', checkAuthenticated, async (req, res) => {
   const postData = await Post.findAll(
-//    [{ include: Comment }]
+      { where: 
+        {id: req.user.dataValues.id}
+      }
        ).catch((err) => { 
           res.json(err);
         });
