@@ -1,0 +1,16 @@
+<div id="w3-container" style="margin: 20px 0px 20px 10px;">
+  <h2>
+    Edit Comment #{{comment.id}}
+  </h2>
+  <form class="form" method="POST" action="/api/comment/edit/{{comment.id}}">
+    <label for="body">
+      Body:
+    </label>
+    <br />
+    <textarea id="body" name="body" rows="10" cols="100">{{comment.body}}</textarea>
+    <br />
+    <button type="submit" value="Submit">
+      Submit
+    </button>
+  </form>
+</div>

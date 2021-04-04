@@ -3,8 +3,8 @@ const Comment = require('../../models/Comment');
 const Post = require('../../models/Post');
 
 
-// route to get comments by post_id
-router.get('/:id', async (req, res) => {
+// routes to get comments by post_id
+router.get('/:id', checkAuthenticated, async (req, res) => {
   try{ 
        const postData = await Post.findByPk(req.params.id);
       if(!postData) {
@@ -18,51 +18,109 @@ router.get('/:id', async (req, res) => {
     };     
 });
 
-// route to create/add a comment by post id
-router.post('/:id', async (req, res) => {
+router.post('/:id', checkAuthenticated, async (req, res) => {
   try { 
     const commentData = await Comment.create({
     post_id: req.params.id,
     body: req.body.body,
     user_id: req.user.dataValues.id,
   });
-  res.status(200).redirect('/dashboard');
+  const comment = commentData.get({ plain: true });
+  const redir = '/api/post/' + comment.post_id;
+
+  res.status(200).redirect(redir);
 } catch (err) {
   res.status(400).json({ message: 'not created' });
 }
 });
 
 
-// // route to edit a comment
-// router.post('/edit/:id', async (req, res) => {
-//   try {
-//     const comment = await Comment.update(
-//     {
-//         body: req.body.body
-//     },
-//     {
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
-//     res.status(200).json(comment);
-//   } catch (err) {
-//       res.status(500).json(err);
-//     };
-// });
+// routes to edit a comment
+router.get('/edit/:id', checkAuthenticated, async (req, res) => {
+  try{ 
+      const commentData = await Comment.findByPk(req.params.id);
+      if(!commentData) {
+          res.status(404).json({message: 'No comment with this id!'});
+          return;
+      }
+      const comment = commentData.get({ plain: true });
+      res.render('comment-edit', { comment: comment, layout: 'user' });
+    } catch (err) {
+        res.status(500).json(err);
+    };     
+});
 
-// // Delete route for a comment
-// router.delete('/:id', (req, res) => {
-//     Comment.destroy({
-//       where: {
-//         id: req.params.id,
-//       },
-//     })
-//       .then((deletedComment) => {
-//         res.json(deletedComment);
-//       })
-//       .catch((err) => res.json(err));
-//   });
+router.post('/edit/:id', checkAuthenticated, async (req, res) => {
+   try {
+    const commentData = await Comment.findByPk(req.params.id);
+    if(!commentData) {
+        res.status(404).json({message: 'No comment with this id!'});
+        return;
+    }
+    const comment = commentData.get({ plain: true });
+    const redir = '/api/post/' + comment.post_id;
+ 
+    await Comment.update(
+     {
+         body: req.body.body
+     },
+     {
+       where: {
+         id: req.params.id,
+       },
+     });
+     res.status(200).redirect(redir);
+//res.status(200).redirect('/dashboard');
+   } catch (err) {
+       res.status(500).json(err);
+     };
+ });
+
+
+// routes to delete a comment
+router.get('/delete/:id', checkAuthenticated, async (req, res) => {
+  try{ 
+      const commentData = await Comment.findByPk(req.params.id);
+      if(!commentData) {
+          res.status(404).json({message: 'No comment with this id!'});
+          return;
+      }
+      const comment = commentData.get({ plain: true });
+      res.render('comment-delete', { comment: comment, layout: 'user' });
+    } catch (err) {
+        res.status(500).json(err);
+    };     
+});
+
+router.post('/delete/:id', checkAuthenticated, async (req, res) => {
+   try {
+    const commentData = await Comment.findByPk(req.params.id);
+    if(!commentData) {
+        res.status(404).json({message: 'No comment with this id!'});
+        return;
+    }
+    const comment = commentData.get({ plain: true });
+    const redir = '/api/post/' + comment.post_id;
+
+    await Comment.destroy(
+     {
+       where: {
+         id: req.params.id,
+       },
+     });
+     res.status(200).redirect(redir);
+   } catch (err) {
+       res.status(500).json(err);
+     };
+ });
+
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
 
 
 module.exports = router;

@@ -13,6 +13,12 @@ router.get('/:id', checkAuthenticated, async (req, res) => {
       }
       const post = postData.get({ plain: true });
 
+      let owner = false;
+      if (req.user.dataValues.id == post.user_id) {
+          owner = true;
+      }
+      post.owner = owner;  
+
       const commentData = await Comment.findAll(
         {
           where: {
@@ -22,6 +28,15 @@ router.get('/:id', checkAuthenticated, async (req, res) => {
       );
 
       const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+      comments.forEach( (comment) => {
+        let owner = false;
+        if (req.user.dataValues.id == comment.user_id) {
+          owner = true;
+        }
+        comment.owner = owner;  
+       }); 
+
 
       res.render('post', { post: post, comments: comments, layout: 'user' });
     } catch (err) {

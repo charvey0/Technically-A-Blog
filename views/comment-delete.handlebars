@@ -1,0 +1,12 @@
+<div id="w3-container" style="margin: 20px 0px 20px 10px;">
+  <h2>
+    Delete Comment #{{comment.id}}
+  </h2>
+  <form class="form" method="POST" action="/api/comment/delete/{{comment.id}}">
+    <p>Body: {{comment.body}}</p>
+<p>Are you sure you want to delete this comment?</p>      
+<input type="checkbox" id="delete" name="delete" value="delete">
+<label for="delete">Yes, I am sure I want to delete this comment.</label><br>    
+    <button type="submit" value="Submit">Submit</button>
+  </form>
+</div>
