@@ -1,0 +1,14 @@
+[
+    {
+        "username": "Bob",
+        "email": "W@W",
+        "hash": "W",
+        "user_id": "1"
+    },
+    {
+        "username": "Francine",
+        "email": "Q@Q",
+        "hash": "Q",
+        "user_id": "2"
+    }
+]

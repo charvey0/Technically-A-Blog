@@ -1,5 +1,6 @@
 body,h1,h2,h3,h4,h5,h6 {
     font-family: "Raleway", sans-serif;
+    margin-left: 10px;
 }
 
 .loginLink {
@@ -14,25 +15,32 @@ form {
     padding: 10px;
 }
 
+
 input[type=email], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   box-sizing: border-box;
+}
+
+textarea {
+  padding: 10px;
+  margin: 10px;
+  width: 90%;
+  background-color: #ddd;
 }
 
 button {
   background-color: #4CAF50;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 20px;
+  margin: 8px;
   border: none;
   cursor: pointer;
-  width: 100%;
 }
 
 button:hover {
-  opacity: 0.8;
+  opacity: 0.6;
 }

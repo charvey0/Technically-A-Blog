@@ -9,7 +9,7 @@
     </div>
 
     <footer class="w3-white" style="padding-left: 10px;">
-      <p>Posted by {{post.user_id}} on {{post.createdAt}}</p>
+      <p>Posted by {{post.username}} on {{post.createdAt}}</p>
       <div class="w3-bar">
         <a href="/api/comment/{{post.id}}" class="w3-button w3-black">Comment</a>
         {{#if post.owner }}
@@ -29,7 +29,7 @@
       </div>
 
       <footer class="w3-white" style="padding-left: 10px;">
-        <p>Posted by {{comment.user_id}} on {{comment.createdAt}}</p>
+        <p>Posted by {{comment.username}} on {{comment.createdAt}}</p>
 
         {{#if comment.owner }}
         <div class="w3-bar">

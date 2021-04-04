@@ -63,10 +63,15 @@ router.get('/dashboard', checkAuthenticated, async (req, res) => {
 // route to create/add a post
 router.post('/create', checkAuthenticated, async (req, res) => {
   try { 
+    const id = req.user.dataValues.id;
+    const userData = await User.findByPk(id);
+    const user = userData.get({ plain: true });
+    const username = user.username;
     const postData = await Post.create({
       title: req.body.title,
       body: req.body.body,
-      user_id: req.user.dataValues.id
+      user_id: id,
+      username: username,
     });
     res.status(200).redirect('/dashboard');
   } catch (err) {

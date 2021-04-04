@@ -1,20 +1,24 @@
 [
     {
+        "username": "Bob",
         "title": "Post Number 1",
         "body": "Lorem ipsum dolor sit amet, consectetur.",
         "user_id": "1"
     },
     {
+        "username": "Francine",
         "title": "Post Number 2",
         "body": "Lorem ipsum dolor sit amet, consectetur.",
         "user_id": "2"
     },
     {
+        "username": "Bob",
         "title": "Post Number 3",
         "body": "Lorem ipsum dolor sit amet, consectetur .",
         "user_id": "1"
     },
     {
+        "username": "Francine",
         "title": "Post Number 4",
         "body": "Lorem ipsum dolor sit amet, consectetur.",
         "user_id": "2"

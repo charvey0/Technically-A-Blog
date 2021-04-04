@@ -1,18 +1,29 @@
-<div id="add-comment-container" style="margin: 20px 0px 20px 10px;">
-  <h2>
-    Add a Comment
-  </h2>
-  <form class="add-comment-form" method="POST" action="/api/comment/{{post.id}}">
-    <label for="body">
-      Comment:
-    </label>
-    <br />
-    <textarea id="body" name="body" rows="6" cols="30">
+<div class="w3-container" id="add-comment-container" style="margin: 20px 0px 20px 10px;">
+  <form class="w3-container" method="POST" action="/api/comment/{{post.id}}">
 
-    </textarea>
-    <br />
-    <button type="submit" value="Submit_comment">
-      Submit
-    </button>
+    <div class="w3-card">
+      <header class="w3-container">
+        <h5>{{post.title}}</h5>
+      </header>
+
+      <div class="w3-container">
+        <p>{{post.body}}</p>
+      </div>
+
+      <footer class="w3-white" style="padding-left: 10px;">
+        <p>Posted by {{post.username}} on {{post.createdAt}}</p>
+      </footer>
+    </div>
+
+    <div class="w3-card-4">
+      <div class="w3-container w3-green">
+        <h5>Add a Comment</h5>
+      </div>
+        <p>      
+        <label for="body"><h6>Comment</h6></label>
+        <textarea class="w3-border" id="body" name="body"></textarea></p>
+    </div>  
+    <button class="w3-btn w3-green" type="submit" value="Submit_comment">Submit</button>
+
   </form>
 </div>
