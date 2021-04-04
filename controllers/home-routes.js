@@ -3,6 +3,7 @@ const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 const User = require('../models/User');
 const passport = require('passport');
+const bcrypt = require('bcrypt');
 
 
 //const Post = require('./models/Post');
@@ -112,7 +113,7 @@ router.post('/register', async (req, res) => {
     try {
          const hash = await bcrypt.hash(req.body.password, 10);
 
-         const userData = await User.create({email: req.body.email, hash: hash});
+         const userData = await User.create({email: req.body.email, hash: hash, username: req.body.username});
          res.status(200).redirect("/login");
          // go to the home page
     } catch (err) {
