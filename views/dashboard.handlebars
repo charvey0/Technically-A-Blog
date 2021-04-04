@@ -1,10 +1,10 @@
 <div class="w3-container" style="padding: 10px;">
-  <h1>Welcome to your Dashboard</h1>
-  <a href="/create" class="w3-button w3-purple">Create Post</a>
+  <h2>Welcome to your Dashboard</h2>
+  <a href="/create" class="w3-button w3-green">Create Post</a>
+  <hr>
 
   {{#each posts as |post|}}
-  <a href="/api/post/{{post.id}}" style=text-decoration:none;>
-    <div class="w3-card w3-hover-shadow" style="margin: 20px 0px 20px 10px;">
+  <div class="w3-card w3-hover-shadow" style="margin: 20px 0px 20px 10px;">
 
     <header class="w3-container w3-green">
       <h5>{{post.title}}</h5>
@@ -27,7 +27,7 @@
     </footer>
 
   </div>
-  </a>
   {{/each}}
+  <hr>
 </div>
 
