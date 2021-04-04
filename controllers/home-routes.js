@@ -36,7 +36,7 @@ router.get('/register', async (req, res) => {
 router.get('/dashboard', checkAuthenticated, async (req, res) => {
   const postData = await Post.findAll(
       { where: 
-        {id: req.user.dataValues.id}
+        {user_id: req.user.dataValues.id}
       }
        ).catch((err) => { 
           res.json(err);
