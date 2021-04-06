@@ -30,6 +30,7 @@ const passport = require('passport');
 const sess = {
   secret: 'Super secret secret',
   cookie: { maxAge: 900000 },
+  rolling: true,
   resave: false,
   saveUninitialized: false,
   store: new SequelizeStore({

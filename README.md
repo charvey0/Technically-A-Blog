@@ -2,12 +2,14 @@
 
 # **Technically: a Blog**
 
+## Link to Live Heroku Deployment
+[Technically: a Blog on Heroku](https://pacific-ocean-52784.herokuapp.com/)
+
 ## Link to GitHub repo:
 [Technically: a Blog](https://github.com/charvey0/Technically-A-Blog)
 
-
 ## Walkthrough video of live deployment:
-[![README-blog-video](https://img.youtube.com/vi/zyZrRwq7f9I/0.jpg)](https://www.youtube.com/watch?v=zyZrRwq7f9I)
+[![README-blog-video](https://img.youtube.com/vi/cpq_uUiLEs0/0.jpg)](https://www.youtube.com/watch?v=cpq_uUiLEs0)
 
 # Table of Contents
 * [Project Description](#project-description)
