@@ -134,7 +134,7 @@ router.post('/delete/:id', checkAuthenticated, async (req, res) => {
 });
 
 function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() && req.session) {
     return next();
   }
   res.redirect('/login');
